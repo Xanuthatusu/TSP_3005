@@ -11,6 +11,7 @@ int main(int argc, char *argv[]) {
     tsp.addRow(v_one, v_two, weight);
   }
 
-  tsp.findAnyCycle();
+  //tsp.findAnyCycle();
+  tsp.findGoodCycle();
 }
 

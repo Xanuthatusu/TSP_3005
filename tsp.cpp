@@ -55,3 +55,37 @@ void TSP::findAnyCycle() {
   std::cout << totalWeight << " " << quality << std::endl;
 }
 
+void TSP::findGoodCycle() {
+  int x = 1;
+  double totalWeight = 0;
+  mVistedNodes.push_back(x);
+  std::cout << x << " ";
+
+  for (int i=0; i < mNodeCount - 1; i++) {
+    int bestY = 1;
+    while (!(std::find(mVistedNodes.begin(), mVistedNodes.end(), bestY) == mVistedNodes.end())) {
+      bestY += 1;
+    }
+    for (int y=1; y <= mNodeCount; y++) {
+
+      if (bestY == x) {
+        bestY += 1;
+      }
+      if (y == x) {
+        continue;
+      }
+
+      if (getValue(x, y) < getValue(x, bestY) && std::find(mVistedNodes.begin(), mVistedNodes.end(), y) == mVistedNodes.end()) {
+        bestY = y;
+      }
+    }
+    std::cout << bestY << " ";
+    mVistedNodes.push_back(bestY);
+    totalWeight += getValue(x, bestY);
+    x = bestY;
+  }
+  totalWeight += getValue(mNodeCount, 1);
+  double quality = 1 - (totalWeight - (mMinWeight * mNodeCount)) / ((mMaxWeight * mNodeCount) - (mMinWeight * mNodeCount));
+  std::cout << totalWeight << " " << quality << std::endl;
+}
+

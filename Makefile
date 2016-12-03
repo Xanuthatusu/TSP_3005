@@ -7,10 +7,10 @@ unittest: compile
 	cat valgrind.log
 
 run: compile
-	./TSP < tsp-samples/graph005.txt
+	./TSP-GOOD < tsp-samples/graph005.txt
 
 compile: main.cpp tsp.o
-	g++ $(CXXFLAGS) -o TSP $^
+	g++ $(CXXFLAGS) -o TSP-GOOD $^
 
 tsp.o: tsp.cpp tsp.h
 	g++ $(CXXFLAGS) -c $<
